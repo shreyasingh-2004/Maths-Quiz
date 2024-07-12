@@ -95,26 +95,6 @@
     <div id="feedback"></div>
     <div id="timer">Time: 120s</div>
     <div id="next"><p>Score 200 for next level</p></div>
-
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
-    
-    <script>
-        var config = {
-            apiKey: "AIzaSyDuj9OCGwtlSC8Ym2PRkVkvSJH_68l5_yY",
-            authDomain: "utthan-4785e.firebaseapp.com",
-            projectId: "utthan-4785e",
-            storageBucket: "utthan-4785e.appspot.com",
-        };
-        firebase.initializeApp(config);
-        
-        // Get a reference to the database service
-        var database = firebase.database();
-        var provider = new firebase.auth.GoogleAuthProvider();
-    </script>
     <script>
         let score = 0;
         let timeRemaining = 120;
