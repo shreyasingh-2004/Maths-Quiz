@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Number Game</title>
+    <style>
+        body {
+            background-image: url('magic number.jpg');
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            margin-top: 5%;
+            font-size: 64px;
+            color: #ab2027;
+        }
+        #game-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 50px auto;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        #question {
+            color: #000203;
+            font-size: 36px;
+            margin: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+            border: 5px solid #000203;
+            width:10cm;
+            margin-bottom: 20px;
+        }
+        #ans {
+            font-size: 30px;
+            font-weight: 400;
+            color: rgb(12, 112, 45);
+        }
+        #answer {
+            margin-top: 10px;
+            font-size: 28px;
+            color: rgb(12, 112, 45);
+            padding: 5px;
+            width: 80px;
+        }
+        button {
+            width: 150px;
+            height: 40px;
+            font-size: 20px;
+            margin: 20px;
+            background-color: rgb(16, 34, 80);
+            color: aliceblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #feedback {
+            margin-top: 10px;
+            font-size: 40px;
+            font-weight: 400;
+            color: rgb(16, 34, 80);
+        }
+        #score {
+            text-align: right;
+            color: #ffecd6;
+            font-size: 36px;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: 0</div>
+    <PRE><h1>😎MAGIC NUMBER  GAME😎</h1></PRE>
+    <div id="question"></div>
+    <label id="ans" for="answer">Your Answer: </label>
+    <input type="text" id="answer" autofocus>
+    <div><button onclick="checkAnswer()">Submit</button></div>
+    <div id="feedback"></div>
+    <div id="timer">Time: 100s</div>
+
+    <script>
+        let score = 0;
+        let timeRemaining = 100;
+        let timerInterval;function updateTimer() {
+            document.getElementById('timer').textContent = 'Time: ' + timeRemaining + 's';
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(function () {
+                timeRemaining--;
+                updateTimer();
+
+                if (timeRemaining === 0) {
+                    clearInterval(timerInterval);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function endGame() {
+            alert('Time is up! Your final score is ' + score);
+            score = 0;
+            document.getElementById('score').textContent = 'Score: ' + score;
+            timeRemaining = 100;
+            updateTimer();
+            generateQuestion();
+        }
+
+        // Function to generate a random addition question
+        function generateQuestion() {
+            const num1 = Math.floor(Math.random() * 100) + 1;
+            const num2 = Math.floor(Math.random() * 100) + 1;
+            return `${num1} + ${num2}`;
+        }
+
+        // Function to check the user's answer
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value, 10);
+            const [num1, num2] = currentQuestion.split(' + ');
+            const correctAnswer = parseInt(num1, 10) + parseInt(num2, 10);
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById('feedback').textContent = 'Correct! Well done!🍬🍬';
+                score+=10;
+            } 
+            else {
+                document.getElementById('feedback').textContent = 'Try again!😇';
+            }
+            document.getElementById('score').textContent = 'Score: ' + score;
+            // Generate a new question
+            currentQuestion = generateQuestion();
+            document.getElementById('question').textContent = currentQuestion;
+            document.getElementById('answer').value = '';
+        }
+
+        // Initialize the game
+        let currentQuestion = generateQuestion();
+        document.getElementById('question').textContent = currentQuestion;
+        updateTimer();
+        startTimer()
+    </script>
+</body>
+</html>
